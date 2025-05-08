@@ -3,7 +3,11 @@ import { type SetupServer, setupServer } from 'msw/node';
 import { type ViteDevServer, createServer } from 'vite';
 import { type PlatformProxy, getPlatformProxy } from 'wrangler';
 
-interface TestFixtures {}
+// 定義 Env 類型
+interface Env {
+	cache: KVNamespace;
+	// 可以添加其他必要的環境變量
+}
 
 interface WorkerFixtures {
 	port: number;
@@ -20,7 +24,7 @@ export async function clearKV(namespace: KVNamespace): Promise<void> {
 
 export const expect = baseExpect.extend({});
 
-export const test = baseTest.extend<TestFixtures, WorkerFixtures>({
+export const test = baseTest.extend<WorkerFixtures>({
 	// Assign a unique "port" for each worker process
 	port: [
 		// eslint-disable-next-line no-empty-pattern
@@ -84,6 +88,10 @@ export const test = baseTest.extend<TestFixtures, WorkerFixtures>({
 	],
 });
 
-test.beforeEach(({ msw }) => {
-	msw.resetHandlers();
-});
+// 不要在配置文件中直接使用 test.beforeEach
+// 改為導出一個設置函數，讓測試文件可以使用
+export function setupMswReset() {
+	return ({ msw }: { msw: SetupServer }) => {
+		msw.resetHandlers();
+	};
+}

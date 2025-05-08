@@ -10,10 +10,12 @@
     "deploy": "wrangler deploy",
     "dev": "remix vite:dev",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "prepare": "husky",
     "start": "wrangler dev",
-    "test": "playwright test --ui",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
     "typecheck": "wrangler types && tsc",
     "typegen": "wrangler types"
   },

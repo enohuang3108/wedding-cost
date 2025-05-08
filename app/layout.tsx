@@ -71,13 +71,7 @@ export function Breadcrumbs({
 	);
 }
 
-export function Layout({
-	children,
-	menus,
-}: {
-	children?: React.ReactNode;
-	menus: Menu[];
-}) {
+export function Layout({ children }: { children?: React.ReactNode }) {
 	return (
 		<div className="mx-auto lg:container">
 			<div className="flex flex-col-reverse lg:flex-row">
