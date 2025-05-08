@@ -1,8 +1,6 @@
-import chevronUpIcon from '~/assets/chevron-up.svg';
-import chevronRightIcon from '~/assets/chevron-right.svg';
-import remixLetterLogo from '~/assets/remix-letter-light.svg';
-import { Link, useLocation } from '@remix-run/react';
 import { Fragment, useEffect, useLayoutEffect, useRef } from 'react';
+import chevronRightIcon from '~/assets/chevron-right.svg';
+import chevronUpIcon from '~/assets/chevron-up.svg';
 
 export interface Menu {
 	title: string;
@@ -73,72 +71,6 @@ export function Breadcrumbs({
 	);
 }
 
-export function MainNavigation({ menus }: { menus: Menu[] }) {
-	const location = useLocation();
-	const trails = menus.reduce<string[]>((result, menu) => {
-		if (result.length === 0) {
-			const link = menu.links.find(link => link.to === location.pathname);
-
-			if (link) {
-				return [menu.title, link.title];
-			}
-		}
-
-		return result;
-	}, []);
-
-	return (
-		<div className="flex flex-col lg:h-screen">
-			<Breadcrumbs locationKey={location.key} trails={trails}>
-				<nav className="mx-auto flex max-w-screen-sm flex-1 flex-col px-5 py-5 lg:py-10">
-					<header className="px-2 pb-8 pt-1">
-						<Link to="/" className="inline-block">
-							<div className="flex items-center gap-2">
-								<img
-									className="inline-block h-8 w-8"
-									src={remixLetterLogo}
-									alt="Remix logo"
-								/>
-								<span className="text-lg">Cloudflare Template</span>
-							</div>
-						</Link>
-					</header>
-					<div className="-ml-5 flex-1 space-y-4 overflow-y-auto">
-						{menus.map(menu => (
-							<div key={menu.title} className="px-2">
-								<div className="sticky top-0 bg-white pb-2 pl-5 font-bold">
-									{menu.title}
-								</div>
-								<ul>
-									{menu.links.map(link => (
-										<li key={link.to}>
-											<Link
-												className="group flex flex-row items-center gap-2 py-2 text-sm"
-												to={link.to}
-											>
-												<img
-													src={chevronRightIcon}
-													className={`h-3 w-3 group-hover:visible ${link.to === location.pathname ? 'visible' : 'invisible'}`}
-													alt="current page indicator"
-													aria-hidden
-												/>
-												{link.title}
-											</Link>
-										</li>
-									))}
-								</ul>
-							</div>
-						))}
-					</div>
-					<footer className="hidden pt-5 lg:block">
-						📜 All-in-one remix starter template for Cloudflare Pages
-					</footer>
-				</nav>
-			</Breadcrumbs>
-		</div>
-	);
-}
-
 export function Layout({
 	children,
 	menus,
@@ -149,11 +81,6 @@ export function Layout({
 	return (
 		<div className="mx-auto lg:container">
 			<div className="flex flex-col-reverse lg:flex-row">
-				<section className="sticky bottom-0 flex-1 lg:relative lg:bottom-auto">
-					<div className="lg:sticky lg:top-0">
-						<MainNavigation menus={menus} />
-					</div>
-				</section>
 				<main className="flex-1">
 					<div className="px-5 py-5 lg:py-10">{children}</div>
 				</main>

@@ -3,7 +3,6 @@ import type {
 	LoaderFunctionArgs,
 	MetaFunction,
 } from '@remix-run/cloudflare';
-import * as React from 'react';
 import {
 	Links,
 	Meta,
@@ -15,6 +14,7 @@ import {
 	useLoaderData,
 	useRouteError,
 } from '@remix-run/react';
+import * as React from 'react';
 import stylesUrl from '~/styles.css?url';
 import { type Menu, ErrorLayout, Layout } from './layout';
 

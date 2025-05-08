@@ -1,5 +1,5 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "wedding-survey"
+name = "wedding-cost"
 main = "./server.ts"
 workers_dev = true
 
