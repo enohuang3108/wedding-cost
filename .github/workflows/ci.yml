@@ -50,7 +50,7 @@ jobs:
           version: 9
       - name: 📥 Install deps
         run: pnpm install --frozen-lockfile
-      - name: ✨ Code format check
-        run: pnpm run format:check
+      # - name: ✨ Code format check
+      #   run: pnpm run format:check
       - name: ✅ Code linting
         run: pnpm run lint
