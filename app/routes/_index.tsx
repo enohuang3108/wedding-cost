@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Progress } from '~/components/ui/progress';
+import { Slider } from '~/components/ui/slider';
 
 export default function Index() {
 	const questions = [
@@ -60,10 +62,10 @@ export default function Index() {
 
 	const currentQuestion = questions[currentQuestionIndex];
 
-	const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleSliderChange = (value: number[]) => {
 		setAnswers({
 			...answers,
-			[currentQuestion.id]: Number(event.target.value),
+			[currentQuestion.id]: value[0],
 		});
 	};
 
@@ -90,48 +92,38 @@ export default function Index() {
 		((currentQuestionIndex + 1) / questions.length) * 100;
 
 	return (
-		<div className="container mx-auto flex min-h-screen flex-col items-center justify-center p-4 sm:p-8">
-			<div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl sm:p-8">
+		<div className="container mx-auto flex min-h-screen flex-col items-center justify-center">
+			<div className="fixed top-0 h-2.5 w-full bg-gray-200">
+				<Progress
+					value={progressPercentage}
+					className="h-2.5 rounded-r-full transition-all duration-300 ease-out [&>div]:bg-red-600"
+				/>
+			</div>
+			<div className="w-full max-w-xl">
 				<h1 className="mb-6 text-center text-2xl font-bold text-gray-800 sm:text-3xl">
-					婚禮花費問卷
+					{currentQuestion.label}
 				</h1>
-
-				{/* Progress Bar */}
-				<div className="mb-6">
-					<div className="text-sm text-gray-600">
-						問題 {currentQuestionIndex + 1} / {questions.length}
-					</div>
-					<div className="mt-1 h-2.5 w-full rounded-full bg-gray-200">
-						<div
-							className="h-2.5 rounded-full bg-blue-600 transition-all duration-300 ease-out"
-							style={{ width: `${progressPercentage}%` }}
-						></div>
-					</div>
-				</div>
 
 				<form onSubmit={handleSubmit} className="space-y-8">
 					<div key={currentQuestion.id} className="flex flex-col">
-						<label
-							htmlFor={currentQuestion.id}
-							className="mb-3 text-lg font-semibold text-gray-700"
-						>
-							{currentQuestion.label}
-						</label>
-						<input
-							type="range"
+						<div className="mb-2 text-center text-2xl font-bold text-red-700">
+							{answers[currentQuestion.id]?.toLocaleString() ??
+								currentQuestion.min?.toLocaleString() ??
+								'0'}
+						</div>
+						<Slider
 							id={currentQuestion.id}
 							name={currentQuestion.id}
 							min={currentQuestion.min}
 							max={currentQuestion.max}
 							step={currentQuestion.step}
-							value={answers[currentQuestion.id]}
-							onChange={handleSliderChange}
-							className="h-3 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-blue-600"
+							value={[answers[currentQuestion.id]]}
+							onValueChange={handleSliderChange}
+							className="accent-red-600"
 						/>
-						<div className="mt-2 text-right text-lg font-medium text-blue-700">
-							{answers[currentQuestion.id]?.toLocaleString() ??
-								currentQuestion.min?.toLocaleString() ??
-								'0'}
+						<div className="mt-1 flex justify-between text-sm text-gray-500">
+							<span>{currentQuestion.min?.toLocaleString() ?? '0'}</span>
+							<span>{currentQuestion.max?.toLocaleString() ?? 'N/A'}</span>
 						</div>
 					</div>
 
@@ -149,14 +141,14 @@ export default function Index() {
 							<button
 								type="button"
 								onClick={handleNext}
-								className="rounded-md bg-blue-600 px-6 py-2.5 text-lg font-semibold text-white hover:bg-blue-700"
+								className="rounded-md bg-red-600 px-6 py-2.5 text-lg font-semibold text-white hover:bg-red-700"
 							>
 								下一題
 							</button>
 						) : (
 							<button
 								type="submit"
-								className="rounded-md bg-green-600 px-6 py-2.5 text-lg font-semibold text-white hover:bg-green-700"
+								className="rounded-md bg-red-600 px-6 py-2.5 text-lg font-semibold text-white hover:bg-red-700"
 							>
 								提交問卷
 							</button>
