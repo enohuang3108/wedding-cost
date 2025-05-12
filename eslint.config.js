@@ -21,7 +21,6 @@ export default [
             "jsx-a11y": jsxA11y,
         },
         rules: {
-            "max-len": ["warn", { code: 120 }],
             "quotes": ["error", "double", { avoidEscape: true }],
             "react/react-in-jsx-scope": "off",
             "react/prop-types": "off",

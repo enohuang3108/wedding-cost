@@ -4,51 +4,19 @@ import { Slider } from "~/components/ui/slider";
 
 export default function Index() {
     const questions = [
-        { id: "banquet", label: "婚宴費用", min: 0, max: 1000000, step: 10000 },
-        {
-            id: "preWeddingPhoto",
-            label: "婚紗攝影",
-            min: 0,
-            max: 200000,
-            step: 1000,
-        },
-        {
-            id: "dressRental",
-            label: "婚紗租借／訂製",
-            min: 0,
-            max: 150000,
-            step: 1000,
-        },
-        { id: "mc", label: "婚禮主持人", min: 0, max: 50000, step: 500 },
-        {
-            id: "favorsDecor",
-            label: "婚禮小物與佈置",
-            min: 0,
-            max: 100000,
-            step: 1000,
-        },
-        {
-            id: "cakesGiftBoxes",
-            label: "喜餅與禮盒",
-            min: 0,
-            max: 150000,
-            step: 1000,
-        },
-        {
-            id: "betrothalMoney",
-            label: "聘金與禮金",
-            min: 0,
-            max: 600000,
-            step: 10000,
-        },
-        { id: "bridalMakeup", label: "新娘秘書", min: 0, max: 80000, step: 1000 },
-        {
-            id: "weddingDayPhoto",
-            label: "婚禮攝影",
-            min: 0,
-            max: 100000,
-            step: 1000,
-        },
+        { id: "betrothalMoney", label: "聘金", min: 0, max: 1000000, step: 10000 },
+        { id: "weddingInvitation", label: "喜帖(一份)",description: "喜帖總支出/份數", min: 0, max: 2000, step: 100 },
+        { id: "cakesGiftBoxes", label: "喜餅(一份)",description: "喜餅總支出/份數", min: 0, max: 2000, step: 100 },
+        { id: "dressRental", label: "新娘婚紗、婚鞋、禮服", min: 0, max: 100000, step: 1000 },
+        { id: "dressRental", label: "新郎西裝", min: 0, max: 100000, step: 1000 },
+        { id: "dressRental", label: "伴郎、伴娘服", min: 0, max: 100000, step: 1000 },
+        { id: "bridalMakeup", label: "妝髮", min: 0, max: 80000, step: 1000 },
+        { id: "dressRental", label: "婚戒", min: 0, max: 100000, step: 1000 },
+        { id: "banquet", label: "婚宴(一桌)", description: "餐廳總支出/桌數。包含宴客、主持人、喜糖、佈置等總花費", min: 0, max: 50000, step: 1000 },
+        { id: "weddingGift", label: "婚禮禮品、紅包", description: "工作人員禮品、紅包等", min: 0, max: 50000, step: 1000 },
+        { id: "preWeddingPhoto", label: "婚紗攝影", min: 0, max: 200000, step: 1000 },
+        { id: "preWeddingPhoto", label: "婚禮設影", min: 0, max: 200000, step: 1000 },
+        { id: "preWeddingPhoto", label: "婚禮錄影", min: 0, max: 200000, step: 1000 },
     ];
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
